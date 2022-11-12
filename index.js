@@ -52,8 +52,9 @@ if (incorrect === answer.length) {
 //check if a guess was correct//
 if (correct > 0) {
   usedLetters.push(guess);
-  console.log(usedLetters);
+  // console.log(usedLetters);
   console.log(`yes, ${guess} was correct!`);
+  console.log(`You have so far guessed ${usedLetters}`)
   rightGuess += correct;
 }
 
@@ -62,7 +63,7 @@ if (rightGuess === answer.length) {
 }
 
 console.log(spaces);
-console.log(rightGuess)
+// console.log(rightGuess)
 
 }
 
@@ -79,13 +80,3 @@ console.log(answer);
 //     console.log(figure);
 // }
 
-
-// how to use the prompt - e.g.:
-// const name = prompt('What is your name?');
-
-// for a given array, return a number of _ for the length of the array // 
-
-// // console.log(underScore(['d','o','g']));
-
-// let answer = ['h','a','p','p','y'];
-// let guess = 'p';
