@@ -52,7 +52,13 @@ const HANGMAN_PICS = [
   
   // TODO: Fill this list with values about a certain topic
   // you are passionate about: e.g. famous scientists, chess players, ...
-  const WORDS_TO_GUESS = [];
+  const WORDS_TO_GUESS = [
+    'china',
+    'japan',
+    'austria',
+    'belgium',
+    'england'
+  ];
   
   module.exports = {
     HANGMAN_PICS: HANGMAN_PICS,
