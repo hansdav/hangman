@@ -6,7 +6,8 @@ const prompt = require('prompt-sync')();
 let spaces = [];
 let usedLetters = [];
 let rightGuess = 0;
-let life = 5;
+let life = 6;
+let figure = constants.HANGMAN_PICS;
 
 //creates an array with the answer split into each letter as an element//
 const answer = WORDS_TO_GUESS[Math.floor(Math.random() * WORDS_TO_GUESS.length)]
@@ -23,14 +24,20 @@ const underScore = (arr) => {
 //calls the underScore function with the randomly selected answer word//
 underScore(answer);
 
-//matching function
+//hangman game function
 const matchFunc = () => {
+  console.log(figure[0])
+
   let guess = prompt('Please choose a letter!').toUpperCase();
 
+//variables act as counters that determine result of the letter after the guess exits the loop. these have to be within the function because they need to reset each time//
   let correct = 0;
   let incorrect = 0;
   let invalid = 0;
 
+  //the first if statement allows player to exit the game//
+  //the second if statement was created to then prevent invalid responses - was put second so it prevents loop from happening//
+  //correct and incorrect checks for validity and presence of letters in useLetters//
   for (let i = 0; i < answer.length; i++) {
     if (guess === 'QUIT') {
       process.exit(0);
@@ -54,6 +61,7 @@ const matchFunc = () => {
   //checks if there a guess is incorrect. the loop increments 'incorecct' by one every time there is no match, so if 'incorrect' equals the length, the guess was wrong//
   if (incorrect === answer.length) {
     life--;
+    figure.shift();
     console.log(
       `Oops. That was not the right letter. You now have ${life} life remaining.`
     );
@@ -74,17 +82,20 @@ const matchFunc = () => {
     console.log('Hmmm. I think this letter has already been guessed.');
   }
 
-  //functions for winning and losing//
+  //functions for winning and losing based on rightGuess that increments by one and life that decreases by one in the above if statements//
   if (rightGuess === answer.length) {
     console.log('You win!');
   }
 
   if (life === 0) {
+    console.log(figure[0])
     console.log('GAME OVER');
     process.exit(0);
   }
+  //console logging spaces shows an array with '_' that will then be spliced//
 
   console.log(spaces);
+
 };
 
 while (rightGuess !== answer.length) {
