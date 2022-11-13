@@ -7,10 +7,11 @@ let spaces = [];
 let usedLetters = [];
 let rightGuess = 0;
 let life = 6;
-let figure = constants.HANGMAN_PICS;
+let figure = constants.HANGMAN_PICS.reverse();
+let diff = prompt('Welcome to the Geo-Hangman! Please select the difficulty by typing 0 for normal, and 1 for hard.');
 
 //creates an array with the answer split into each letter as an element//
-const answer = WORDS_TO_GUESS[Math.floor(Math.random() * WORDS_TO_GUESS.length)]
+let answer = WORDS_TO_GUESS[parseInt(diff)][Math.floor(Math.random() * WORDS_TO_GUESS[parseInt(diff)].length)]
   .toString()
   .split('');
 
@@ -19,6 +20,8 @@ const underScore = (arr) => {
   for (let i = 0; i < arr.length; i++) {
     spaces.push('_');
   }
+
+
 };
 
 //calls the underScore function with the randomly selected answer word//
@@ -26,11 +29,15 @@ underScore(answer);
 
 //hangman game function
 const matchFunc = () => {
-  console.log(figure[0])
+
+  console.log(diff);
+
+  console.log(figure[life]);
+  console.log(spaces);
 
   let guess = prompt('Please choose a letter!').toUpperCase();
 
-//variables act as counters that determine result of the letter after the guess exits the loop. these have to be within the function because they need to reset each time//
+  //variables act as counters that determine result of the letter after the guess exits the loop. these have to be within the function because they need to reset each time//
   let correct = 0;
   let incorrect = 0;
   let invalid = 0;
@@ -59,9 +66,15 @@ const matchFunc = () => {
   }
 
   //checks if there a guess is incorrect. the loop increments 'incorecct' by one every time there is no match, so if 'incorrect' equals the length, the guess was wrong//
-  if (incorrect === answer.length) {
+  if (incorrect === answer.length && diff === '0') {
     life--;
-    figure.shift();
+    console.log(
+      `Oops. That was not the right letter. You now have ${life} life remaining.`
+    );
+    usedLetters.push(guess);
+    console.log(`You have so far guessed ${usedLetters}`);
+  } else if (incorrect === answer.length && diff === '1') {
+    life = life - 2;
     console.log(
       `Oops. That was not the right letter. You now have ${life} life remaining.`
     );
@@ -84,18 +97,19 @@ const matchFunc = () => {
 
   //functions for winning and losing based on rightGuess that increments by one and life that decreases by one in the above if statements//
   if (rightGuess === answer.length) {
-    console.log('You win!');
+    console.log(spaces);
+    console.log(`That's right, it's ${answer.join('')}! You win!`);
   }
 
   if (life === 0) {
-    console.log(figure[0])
-    console.log('GAME OVER');
+    console.log(figure[life]);
+    console.log(spaces);
+    console.log(`GAME OVER! The answer was ${answer.join('')}.`);
     process.exit(0);
   }
   //console logging spaces shows an array with '_' that will then be spliced//
 
-  console.log(spaces);
-
+  // console.log(spaces);
 };
 
 while (rightGuess !== answer.length) {
