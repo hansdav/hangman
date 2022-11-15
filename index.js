@@ -107,9 +107,7 @@ const matchFunc = () => {
     console.log(`GAME OVER! The answer was ${answer.join('')}.`);
     process.exit(0);
   }
-  //console logging spaces shows an array with '_' that will then be spliced//
 
-  // console.log(spaces);
 };
 
 while (rightGuess !== answer.length) {
