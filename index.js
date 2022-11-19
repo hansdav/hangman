@@ -8,10 +8,14 @@ let usedLetters = [];
 let rightGuess = 0;
 let life = 6;
 let figure = constants.HANGMAN_PICS.reverse();
-let diff = prompt('Welcome to the Geo-Hangman! Please select the difficulty by typing 0 for normal, and 1 for hard.');
+let diff = prompt(
+  'Welcome to the Geo-Hangman! Please select the difficulty by typing 0 for normal, and 1 for hard.'
+);
 
 //creates an array with the answer split into each letter as an element//
-let answer = WORDS_TO_GUESS[parseInt(diff)][Math.floor(Math.random() * WORDS_TO_GUESS[parseInt(diff)].length)]
+let answer = WORDS_TO_GUESS[parseInt(diff)][
+  Math.floor(Math.random() * WORDS_TO_GUESS[parseInt(diff)].length)
+]
   .toString()
   .split('');
 
@@ -20,8 +24,6 @@ const underScore = (arr) => {
   for (let i = 0; i < arr.length; i++) {
     spaces.push('_');
   }
-
-
 };
 
 //calls the underScore function with the randomly selected answer word//
@@ -29,7 +31,6 @@ underScore(answer);
 
 //hangman game function
 const matchFunc = () => {
-
   console.log(diff);
 
   console.log(figure[life]);
@@ -107,7 +108,6 @@ const matchFunc = () => {
     console.log(`GAME OVER! The answer was ${answer.join('')}.`);
     process.exit(0);
   }
-
 };
 
 while (rightGuess !== answer.length) {
