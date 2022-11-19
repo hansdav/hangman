@@ -53,7 +53,7 @@ const matchFunc = () => {
       guess.length != 1 ||
       guess === null ||
       guess === '' ||
-      Number.isInteger(parseInt(guess.toString())) === true
+      Number.isInteger(parseInt(guess)) === true
     ) {
       console.log('That is not a valid answer. Please try again!');
       invalid++;
